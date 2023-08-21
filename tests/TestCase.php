@@ -2,9 +2,9 @@
 
 namespace Codedor\FilamentResourcePicker\Tests;
 
+use Codedor\FilamentResourcePicker\Providers\FilamentResourcePickerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Codedor\FilamentResourcePicker\Providers\FilamentResourcePickerServiceProvider;
 
 class TestCase extends Orchestra
 {
