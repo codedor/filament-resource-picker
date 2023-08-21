@@ -11,8 +11,6 @@ class FilamentResourcePickerServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('filament-resource-picker')
-            ->setBasePath(__DIR__ . '/../')
-            ->hasConfigFile()
-            ->hasMigration('create_package_table');
+            ->setBasePath(__DIR__ . '/../');
     }
 }
