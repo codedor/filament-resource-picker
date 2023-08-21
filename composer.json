@@ -1,12 +1,12 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "codedor/filament-resource-picker",
+    "description": "This is my package filament-resource-picker",
     "keywords": [
-        ":vendor_name",
+        "codedor",
         "laravel",
-        ":package_slug"
+        "filament-resource-picker"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/codedor/filament-resource-picker",
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -26,19 +26,19 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Codedor\\FilamentResourcePicker\\": "src",
+            "Codedor\\FilamentResourcePicker\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Codedor\\FilamentResourcePicker\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\Providers\\SkeletonServiceProvider"
+                "Codedor\\FilamentResourcePicker\\Providers\\FilamentResourcePickerServiceProvider"
             ]
         }
     },

@@ -1,4 +1,4 @@
-# :package_description
+# This is my package filament-resource-picker
 
 ## Introduction
 

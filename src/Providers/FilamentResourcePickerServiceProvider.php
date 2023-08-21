@@ -1,16 +1,16 @@
 <?php
 
-namespace VendorName\Skeleton\Providers;
+namespace Codedor\FilamentResourcePicker\Providers;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FilamentResourcePickerServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('skeleton')
+            ->name('filament-resource-picker')
             ->setBasePath(__DIR__ . '/../')
             ->hasConfigFile()
             ->hasMigration('create_package_table');
