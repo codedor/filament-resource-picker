@@ -2,7 +2,6 @@
 
 namespace Codedor\FilamentResourcePicker\Actions;
 
-use Codedor\FilamentResourcePicker\Forms\Components\ResourcePickerInput;
 use Filament\Forms\Components\Actions\Action;
 
 class OpenResourcePickerAction extends Action
