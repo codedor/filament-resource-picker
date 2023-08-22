@@ -26,6 +26,4 @@ class ResourcePicker extends Component
             'isList' => ($this->displayType === 'list'),
         ]);
     }
-
-
 }
