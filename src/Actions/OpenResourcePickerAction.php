@@ -30,6 +30,7 @@ class OpenResourcePickerAction extends Action
                 'keyField' => $component->getKeyField(),
                 'labelField' => $component->getLabelField(),
                 'isMultiple' => $component->isMultiple(),
+                'isGrid' => $component->isGrid(),
             ]);
         });
     }

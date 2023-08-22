@@ -21,11 +21,12 @@ class ResourcePicker extends Component
 
     public bool $isMultiple;
 
+    public bool $isGrid;
+
     public function render()
     {
         return view('filament-resource-picker::livewire.resource-picker', [
-            'isGrid' => ($this->displayType === 'grid'),
-            'isList' => ($this->displayType === 'list'),
+            'isList' => ! $this->isGrid,
         ]);
     }
 }

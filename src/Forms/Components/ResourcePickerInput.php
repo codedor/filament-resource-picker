@@ -20,9 +20,11 @@ class ResourcePickerInput extends Field
 
     public string|Closure $labelField = 'id';
 
-    public string|Closure $displayType = 'list';
+    public null|string|Closure $displayType = null;
 
-    public bool|Closure $multiple = false;
+    public bool|Closure $isGrid = false;
+
+    public bool|Closure $isMultiple = false;
 
     public Closure $query;
 
@@ -40,9 +42,16 @@ class ResourcePickerInput extends Field
         ]);
     }
 
-    public function grid(): self
+    public function grid(bool|Closure $grid): self
     {
-        return $this->displayType('grid');
+        $this->isGrid = $grid;
+
+        return $this;
+    }
+
+    public function isGrid(): bool
+    {
+        return $this->evaluate($this->isGrid);
     }
 
     public function displayType(string|Closure $displayType): self
@@ -54,7 +63,15 @@ class ResourcePickerInput extends Field
 
     public function getDisplayType(): string
     {
-        return $this->evaluate($this->displayType);
+        if (! is_null($this->displayType)) {
+            return $this->evaluate($this->displayType);
+        }
+
+        if ($this->isGrid()) {
+            return 'filament-resource-picker::items.grid';
+        }
+
+        return 'filament-resource-picker::items.list';
     }
 
     public function keyField(string|Closure $keyField): self
@@ -83,14 +100,14 @@ class ResourcePickerInput extends Field
 
     public function multiple(bool|Closure $multiple = true): self
     {
-        $this->multiple = $multiple;
+        $this->isMultiple = $multiple;
 
         return $this;
     }
 
     public function isMultiple(): bool
     {
-        return $this->evaluate($this->multiple);
+        return $this->evaluate($this->isMultiple);
     }
 
     public function resource(string|Closure $resource): self

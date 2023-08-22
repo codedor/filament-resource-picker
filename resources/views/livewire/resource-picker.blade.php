@@ -18,12 +18,12 @@
 }">
     <div @class([
         'gap-4',
-        'grid grid-cols-4' => $isGrid,
+        'grid grid-cols-6' => $isGrid,
         'flex flex-col' => $isList,
     ])>
         @foreach ($resources as $resource)
             <x-dynamic-component
-                :component="'filament-resource-picker::items.' . $displayType"
+                :component="$displayType"
                 :item="$resource"
                 :key-field="$keyField"
                 :label-field="$labelField"
