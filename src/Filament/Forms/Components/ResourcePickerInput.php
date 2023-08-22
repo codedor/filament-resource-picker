@@ -1,9 +1,9 @@
 <?php
 
-namespace Codedor\FilamentResourcePicker\Forms\Components;
+namespace Codedor\FilamentResourcePicker\Filament\Forms\Components;
 
 use Closure;
-use Codedor\FilamentResourcePicker\Actions\OpenResourcePickerAction;
+use Codedor\FilamentResourcePicker\Filament\Actions\OpenResourcePickerAction;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Set;
