@@ -1,8 +1,8 @@
 <livewire:filament-resource-picker::resource-picker
-    :resources="$resources"
-    :display-type="$displayType"
-    :state-path="$statePath"
-    :state="$state ?? []"
-    :key-field="$keyField"
-    :label-field="$labelField"
+    :resources="$component->getResources()"
+    :display-type="$component->getDisplayType()"
+    :state-path="$component->getStatePath()"
+    :state="$component->getState() ?? []"
+    :key-field="$component->getKeyField()"
+    :label-field="$component->getLabelField()"
 />
