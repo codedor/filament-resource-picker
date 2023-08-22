@@ -4,7 +4,6 @@ namespace Codedor\FilamentResourcePicker\Actions;
 
 use Codedor\FilamentResourcePicker\Forms\Components\ResourcePickerInput;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Field;
 
 class OpenResourcePickerAction extends Action
 {
@@ -22,9 +21,15 @@ class OpenResourcePickerAction extends Action
         $this->modalSubmitAction(false);
         $this->modalCancelAction(false);
 
-        $this->modalContent(static function (Field $component) {
+        $this->modalContent(static function (ResourcePickerInput $component) {
             return view('filament-resource-picker::picker', [
-                'component' => $component,
+                'resources' => $component->getResources(),
+                'displayType' => $component->getDisplayType(),
+                'statePath' => $component->getStatePath(),
+                'state' => $component->getState() ?? [],
+                'keyField' => $component->getKeyField(),
+                'labelField' => $component->getLabelField(),
+                'isMultiple' => $component->isMultiple(),
             ]);
         });
     }

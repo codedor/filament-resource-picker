@@ -19,6 +19,8 @@ class ResourcePicker extends Component
 
     public array $state = [];
 
+    public bool $isMultiple;
+
     public function render()
     {
         return view('filament-resource-picker::livewire.resource-picker', [

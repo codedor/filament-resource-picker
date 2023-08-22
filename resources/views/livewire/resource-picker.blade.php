@@ -1,5 +1,6 @@
 <div x-data="{
     state: @entangle('state'),
+    isMultiple: @entangle('isMultiple'),
     submit () {
         $wire.dispatch('picked-resource', {
             statePath: '{{ $statePath }}',
@@ -7,6 +8,12 @@
         })
 
         this.close()
+    },
+    updatedState () {
+        if (! this.isMultiple) {
+            this.state = [this.state[this.state.length - 1]]
+            this.submit()
+        }
     },
 }">
     <div @class([
@@ -27,6 +34,7 @@
                     type="checkbox"
                     x-model="state"
                     value="{{ $resource->{$keyField} }}"
+                    x-on:change="updatedState"
                 >
             </x-dynamic-component>
         @endforeach
@@ -38,9 +46,11 @@
                 {{ __('filament-resource-picker::picker.cancel picks') }}
             </x-filament::button>
 
-            <x-filament::button x-on:click.prevent="submit">
-                {{ __('filament-resource-picker::picker.select resources') }}
-            </x-filament::button>
+            @if ($isMultiple)
+                <x-filament::button x-on:click.prevent="submit">
+                    {{ __('filament-resource-picker::picker.select resources') }}
+                </x-filament::button>
+            @endif
         </div>
     </div>
 </div>

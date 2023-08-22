@@ -22,6 +22,8 @@ class ResourcePickerInput extends Field
 
     public string|Closure $displayType = 'list';
 
+    public bool|Closure $multiple = false;
+
     public Closure $query;
 
     public function setUp(): void
@@ -77,6 +79,18 @@ class ResourcePickerInput extends Field
     public function getLabelField(): string
     {
         return $this->evaluate($this->labelField);
+    }
+
+    public function multiple(bool|Closure $multiple = true): self
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    public function isMultiple(): bool
+    {
+        return $this->evaluate($this->multiple);
     }
 
     public function resource(string|Closure $resource): self
