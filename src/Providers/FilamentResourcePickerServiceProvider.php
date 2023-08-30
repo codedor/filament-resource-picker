@@ -24,7 +24,6 @@ class FilamentResourcePickerServiceProvider extends PackageServiceProvider
             ->name($this->packageName())
             ->hasTranslations()
             ->setBasePath(__DIR__ . '/../')
-            ->hasRoute('web')
             ->hasViews();
     }
 

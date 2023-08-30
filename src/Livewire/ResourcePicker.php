@@ -3,6 +3,8 @@
 namespace Codedor\FilamentResourcePicker\Livewire;
 
 use Filament\Resources\Resource;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -11,6 +13,9 @@ use Livewire\WithPagination;
 
 class ResourcePicker extends Component
 {
+    /**
+     * @var Resource
+     */
     public string $resourceClass;
 
     public $items = [];
@@ -62,10 +67,15 @@ class ResourcePicker extends Component
 
     public function getItems(int $offset = 0)
     {
-        return $this->resourceClass::getEloquentQuery()
-            ->when($this->search, function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
-            })
+        $query = $this->resourceClass::getEloquentQuery();
+
+        if (method_exists($this->resourceClass, 'searchQuery')) {
+            // Have to do this like this, since we can not access the
+            // searchable columns without a HasTable Livewire component
+            $query = $this->resourceClass::searchQuery($query, $this->search);
+        }
+
+        return $query
             ->latest()
             ->offset($offset)
             ->limit(2)
