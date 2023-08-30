@@ -1,5 +1,5 @@
 <livewire:filament-resource-picker::resource-picker
-    :resources="$resources"
+    :resource-class="$resourceClass"
     :state-path="$statePath"
     :state="$state ?? []"
 
