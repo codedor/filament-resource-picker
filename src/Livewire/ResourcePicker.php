@@ -8,7 +8,7 @@ use Livewire\Component;
 class ResourcePicker extends Component
 {
     /**
-     * @var Resource
+     * @var resource
      */
     public string $resourceClass;
 
