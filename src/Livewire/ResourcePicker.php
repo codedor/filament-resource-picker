@@ -72,8 +72,22 @@ class ResourcePicker extends Component
         return $query
             ->latest()
             ->offset($offset)
-            ->limit(2)
+            ->limit(20)
             ->get();
+    }
+
+    public function getItemCount()
+    {
+        $query = $this->resourceClass::getEloquentQuery();
+
+        if (method_exists($this->resourceClass, 'searchQuery')) {
+            // Have to do this like this, since we can not access the
+            // searchable columns without a HasTable Livewire component
+            $query = $this->resourceClass::searchQuery($query, $this->search);
+        }
+
+        return $query
+            ->count();
     }
 
     public function loadMoreItems(): void

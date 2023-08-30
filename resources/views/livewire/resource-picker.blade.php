@@ -58,13 +58,15 @@
             </x-dynamic-component>
         @endforeach
 
-        <x-filament::button
-            size="xs"
-            color="gray"
-            wire:click="loadMoreItems()"
-        >
-            {{ __('filament-resource-picker::picker.load more') }}
-        </x-filament::button>
+        @if(count($items) < $this->getItemCount())
+            <x-filament::button
+                size="xs"
+                color="gray"
+                wire:click="loadMoreItems()"
+            >
+                {{ __('filament-resource-picker::picker.load more') }}
+            </x-filament::button>
+        @endif
     </div>
 
     <div class="fi-modal-footer w-full pt-6">

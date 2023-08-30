@@ -23,7 +23,7 @@ class OpenResourcePickerAction extends Action
 
         $this->modalContent(static function (ResourcePickerInput $component) {
             return view('filament-resource-picker::picker', [
-                'resources' => $component->getResources(),
+                'resourceClass' => $component->getResource(),
                 'displayType' => $component->getDisplayType(),
                 'statePath' => $component->getStatePath(),
                 'state' => $component->getState() ?? [],

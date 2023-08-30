@@ -131,7 +131,7 @@ class ResourcePickerInput extends Field
 
     public function getQuery(): Builder
     {
-        $model = (new ($this->getResource()))->getModel();
+        $model = $this->getResource()::getModel();
 
         return $this->evaluate($this->query, [
             'query' => $model::query()->withoutGlobalScopes(),
@@ -144,7 +144,12 @@ class ResourcePickerInput extends Field
             throw new \Exception('Resource to pick not set');
         }
 
-        return $this->getQuery()->get();
+        return $this->getQuery()
+            ->get()
+            ->sortBy(function($item) {
+                return array_search($item->getKey(), $this->getState());
+            })
+            ->values();
     }
 
     public function getStateAsResources(): Collection
