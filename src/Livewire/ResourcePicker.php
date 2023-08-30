@@ -3,13 +3,7 @@
 namespace Codedor\FilamentResourcePicker\Livewire;
 
 use Filament\Resources\Resource;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Table;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class ResourcePicker extends Component
 {
