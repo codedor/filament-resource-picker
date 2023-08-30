@@ -7,9 +7,6 @@ use Livewire\Component;
 
 class ResourcePicker extends Component
 {
-    /**
-     * @var resource
-     */
     public string $resourceClass;
 
     public $items = [];
