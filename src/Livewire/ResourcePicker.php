@@ -2,7 +2,6 @@
 
 namespace Codedor\FilamentResourcePicker\Livewire;
 
-use Filament\Resources\Resource;
 use Livewire\Component;
 
 class ResourcePicker extends Component
