@@ -53,6 +53,7 @@ class ResourcePicker extends Component
     {
         return view('filament-resource-picker::livewire.resource-picker', [
             'isList' => ! $this->isGrid,
+            'hasSearch' => method_exists($this->resourceClass, 'searchQuery'),
         ]);
     }
 

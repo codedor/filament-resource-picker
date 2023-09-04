@@ -147,7 +147,7 @@ class ResourcePickerInput extends Field
         return $this->getQuery()
             ->get()
             ->sortBy(function ($item) {
-                return array_search($item->getKey(), $this->getState());
+                return array_search($item->getKey(), $this->getState() ?? []);
             })
             ->values();
     }
