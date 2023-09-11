@@ -2,9 +2,9 @@
 
 namespace Codedor\FilamentResourcePicker\Livewire;
 
+use Codedor\FilamentResourcePicker\ResourceQuery;
 use Illuminate\Support\Arr;
 use Livewire\Component;
-use Codedor\FilamentResourcePicker\ResourceQuery;
 
 class ResourcePicker extends Component
 {
