@@ -4,8 +4,6 @@ namespace Codedor\FilamentResourcePicker\Filament;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 
 class ResourcePickerPlugin implements Plugin
 {
