@@ -21,9 +21,6 @@ class ResourcePickerPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        FilamentAsset::register([
-            Css::make('filament-resource-picker-stylesheet', __DIR__ . '/../../dist/css/filament-resource-picker.css'),
-        ], 'codedor/filament-resource-picker');
     }
 
     public function boot(Panel $panel): void
