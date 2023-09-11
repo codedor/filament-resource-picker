@@ -1,1 +1,79 @@
-# Filament Resource Picker
+# Resource Picker for Filament
+
+This package allows to pick items from other resources as an alternative for relationships (e.g. when you want to save related items in a json column).
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require codedor/filament-resource-picker
+```
+
+## Usage
+
+```php
+public static function form(Form $form): Form
+{
+    return $form
+        ->schema([
+            \Codedor\FilamentResourcePicker\Filament\Forms\Components\ResourcePickerInput::make('author')
+                ->resource(UserResource::class),
+        ]);
+}
+```
+
+Passing the resource is obligated, since we will use that to fetch the items that can be picked.
+
+### multiple()
+
+By default you can only pick one item. If you want to pick multiple items, you can use the `multiple()` method.
+
+```php
+ResourcePickerInput::make('authors')
+    ->resource(UserResource::class)
+    ->multiple(),
+```
+
+### keyField()
+
+By default we will save the id field, but if you want the name or another field, you can adjust it by calling this method.
+
+```php
+ResourcePickerInput::make('authors')
+    ->resource(UserResource::class)
+    ->keyField('name'),
+```
+
+### labelField()
+
+By default we will display the id value, but if you want the name or another field, you can adjust it by calling this method.
+
+```php
+ResourcePickerInput::make('authors')
+    ->resource(UserResource::class)
+    ->labelField('name'),
+```
+
+### displayType()
+
+Via this method you can adjust the view we will use in the picker modal
+
+### grid()
+
+Tell us if we have to display the items in the resource in a grid or a list.
+
+## Searching resources
+
+We provide a search input in the picker modal, but you have to implement the search logic yourself. You can do this by adding a `searchQuery` method to your resource.
+
+```php
+public static function searchQuery(Builder $query, ?string $search = null): \Illuminate\Database\Eloquent\Builder
+{
+    return $query
+        ->when(
+            $search,
+            fn () => $query->where('name', 'like', '%' . $search . '%')
+        );
+}
+```
