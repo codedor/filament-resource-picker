@@ -4,10 +4,12 @@ namespace Codedor\FilamentResourcePicker\Filament\Forms\Components;
 
 use Closure;
 use Codedor\FilamentResourcePicker\Filament\Actions\OpenResourcePickerAction;
+use Codedor\FilamentResourcePicker\ResourceQuery;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Set;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class ResourcePickerInput extends Field
@@ -26,12 +28,8 @@ class ResourcePickerInput extends Field
 
     public bool|Closure $isMultiple = false;
 
-    public Closure $query;
-
     public function setUp(): void
     {
-        $this->query(fn (Builder $query) => $query);
-
         $this->registerActions([
             OpenResourcePickerAction::make(),
 
@@ -122,41 +120,17 @@ class ResourcePickerInput extends Field
         return $this->evaluate($this->resource);
     }
 
-    public function query(Closure $callback): self
-    {
-        $this->query = $callback;
-
-        return $this;
-    }
-
-    public function getQuery(): Builder
-    {
-        $model = $this->getResource()::getModel();
-
-        return $this->evaluate($this->query, [
-            'query' => $model::query()->withoutGlobalScopes(),
-        ]);
-    }
-
-    public function getResources(): Collection
-    {
-        if (! isset($this->resource)) {
-            throw new \Exception('Resource to pick not set');
-        }
-
-        return $this->getQuery()
-            ->get()
-            ->sortBy(function ($item) {
-                return array_search($item->getKey(), $this->getState() ?? []);
-            })
-            ->values();
-    }
-
     public function getStateAsResources(): Collection
     {
-        return $this->getResources()->whereIn(
-            $this->getKeyField(),
-            $this->getState() ?? [],
-        );
+        $state = Arr::wrap($this->getState() ?? []);
+
+        return ResourceQuery::get($this->getResource())
+            ->whereIn(
+                $this->getKeyField(),
+                $state,
+            )
+            ->get()
+            ->sortBy(fn ($item) => array_search($item->getKey(), $state))
+            ->values();
     }
 }

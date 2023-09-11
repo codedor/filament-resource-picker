@@ -2,7 +2,9 @@
 
 namespace Codedor\FilamentResourcePicker\Livewire;
 
+use Illuminate\Support\Arr;
 use Livewire\Component;
+use Codedor\FilamentResourcePicker\ResourceQuery;
 
 class ResourcePicker extends Component
 {
@@ -41,7 +43,7 @@ class ResourcePicker extends Component
         $this->statePath = $statePath;
         $this->keyField = $keyField;
         $this->labelField = $labelField;
-        $this->state = $state;
+        $this->state = Arr::wrap($state);
         $this->isMultiple = $isMultiple;
         $this->isGrid = $isGrid;
 
@@ -52,21 +54,13 @@ class ResourcePicker extends Component
     {
         return view('filament-resource-picker::livewire.resource-picker', [
             'isList' => ! $this->isGrid,
-            'hasSearch' => method_exists($this->resourceClass, 'searchQuery'),
+            'hasSearch' => method_exists($this->resourceClass, ResourceQuery::resourcePickerQueryMethod),
         ]);
     }
 
     public function getItems(int $offset = 0)
     {
-        $query = $this->resourceClass::getEloquentQuery();
-
-        if (method_exists($this->resourceClass, 'searchQuery')) {
-            // Have to do this like this, since we can not access the
-            // searchable columns without a HasTable Livewire component
-            $query = $this->resourceClass::searchQuery($query, $this->search);
-        }
-
-        return $query
+        return ResourceQuery::get($this->resourceClass, $this->search)
             ->latest()
             ->offset($offset)
             ->limit(20)
@@ -75,15 +69,7 @@ class ResourcePicker extends Component
 
     public function getItemCount()
     {
-        $query = $this->resourceClass::getEloquentQuery();
-
-        if (method_exists($this->resourceClass, 'searchQuery')) {
-            // Have to do this like this, since we can not access the
-            // searchable columns without a HasTable Livewire component
-            $query = $this->resourceClass::searchQuery($query, $this->search);
-        }
-
-        return $query
+        return ResourceQuery::get($this->resourceClass, $this->search)
             ->count();
     }
 
