@@ -65,10 +65,11 @@ Tell us if we have to display the items in the resource in a grid or a list.
 
 ## Searching resources
 
-We provide a search input in the picker modal, but you have to implement the search logic yourself. You can do this by adding a `searchQuery` method to your resource.
+We provide a search input in the picker modal, but you have to implement the search logic yourself. You can do this by adding a `resourcePickerQuery` method to your resource.
+The query you get here is the same one as `Resource::getEloquentQuery()` that Filament provides, see the [docs](https://filamentphp.com/docs/3.x/panels/resources/getting-started#customizing-the-resource-eloquent-query).
 
 ```php
-public static function searchQuery(Builder $query, ?string $search = null): \Illuminate\Database\Eloquent\Builder
+public static function resourcePickerQuery(Builder $query, ?string $search = null): \Illuminate\Database\Eloquent\Builder
 {
     return $query
         ->when(
