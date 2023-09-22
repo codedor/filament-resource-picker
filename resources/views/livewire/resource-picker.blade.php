@@ -2,12 +2,10 @@
     state: @entangle('state'),
     isMultiple: @entangle('isMultiple'),
     submit () {
-        $wire.dispatch('picked-resource', {
+        $wire.$parent.callMountedFormComponentAction({
             statePath: '{{ $statePath }}',
             resources: this.state,
         })
-
-        this.close()
     },
     updatedState () {
         if (! this.isMultiple) {
