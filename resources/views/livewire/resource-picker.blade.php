@@ -36,51 +36,70 @@
             </svg>
         </label>
     @endif
-    <div @class([
-        'gap-4',
-        'grid grid-cols-6' => $isGrid,
-        'flex flex-col' => $isList,
-    ])>
-        @foreach ($items as $item)
-            <x-dynamic-component
-                :component="$displayType"
-                :item="$item"
-                :key-field="$keyField"
-                :label-field="$labelField"
-                :state-path="$statePath"
-            >
-                <input
-                    id="resource-picker::{{ $statePath }}-{{ $item->{$keyField} }}"
-                    type="checkbox"
-                    x-model="state"
-                    value="{{ $item->{$keyField} }}"
-                    x-on:change="updatedState"
+    <div
+        class="overflow-hidden overflow-y-auto p-1"
+        style="max-height:70vh"
+    >
+        <div
+            @class([
+                'gap-4',
+                'grid grid-cols-3' => $isGrid
+                'flex flex-col' => $isList
+            ])
+        >
+            @foreach ($items as $item)
+                <x-dynamic-component
+                    :component="$displayType"
+                    :item="$item"
+                    :key-field="$keyField"
+                    :label-field="$labelField"
+                    :state-path="$statePath"
                 >
-            </x-dynamic-component>
-        @endforeach
+                    <input
+                        class="fi-checkbox-input fi-ta-record-checkbox
+                            text-primary-600
+                            rounded border-none bg-white shadow-sm ring-1 ring-gray-950/10
+                            dark:bg-white/5 dark:disabled:bg-transparent dark:disabled:checked:bg-gray-600 dark:ring-white/20 dark:disabled:ring-white/10
+                            dark:checked:bg-primary-500 dark:focus:ring-primary-500 dark:checked:focus:ring-primary-400/50
+                            transition duration-75
+                            checked:ring-0 checked:focus:ring-primary-500/50
+                            focus:ring-2 focus:ring-offset-0 focus:ring-primary-600
+                            disabled:pointer-events-none disabled:bg-gray-50 disabled:text-gray-50 disabled:checked:bg-current disabled:checked:text-gray-400
+                        "
+                        style="margin-top: 0.1rem;"
+                        id="resource-picker::{{ $statePath }}-{{ $item->{$keyField} }}"
+                        type="checkbox"
+                        x-model="state"
+                        value="{{ $item->{$keyField} }}"
+                        x-on:change="updatedState"
+                    >
+                </x-dynamic-component>
+            @endforeach
+        </div>
 
         @if(count($items) < $this->getItemCount())
-            <x-filament::button
-                size="xs"
-                color="gray"
-                wire:click="loadMoreItems()"
-            >
-                {{ __('filament-resource-picker::picker.load more') }}
-            </x-filament::button>
+            <div class="py-6">
+                <x-filament::button
+                    size="xs"
+                    color="gray"
+                    wire:click="loadMoreItems()"
+                >
+                    {{ __('filament-resource-picker::picker.load more') }}
+                </x-filament::button>
+            </div>
         @endif
     </div>
 
     <div class="fi-modal-footer w-full pt-6">
         <div class="fi-modal-footer-actions gap-3 flex flex-wrap items-center">
-            <x-filament::button x-on:click.prevent="close" color="gray">
-                {{ __('filament-resource-picker::picker.cancel picks') }}
-            </x-filament::button>
-
             @if ($isMultiple)
                 <x-filament::button x-on:click.prevent="submit">
                     {{ __('filament-resource-picker::picker.select resources') }}
                 </x-filament::button>
             @endif
+            <x-filament::button x-on:click.prevent="close" color="gray">
+                {{ __('filament-resource-picker::picker.cancel picks') }}
+            </x-filament::button>
         </div>
     </div>
 </div>

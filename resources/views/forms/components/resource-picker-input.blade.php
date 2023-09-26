@@ -32,24 +32,46 @@
                     x-on:start="dragging = true"
                     x-bind:class="dragging ? 'gallery--dragging' : ''"
                 @endif
+                class="list-disc px-3"
             >
                 @foreach ($getStateAsResources() as $item)
                     <li
                         x-sortable-handle
                         x-sortable-item="{{ $item->getKey() }}"
+                        class="text-sm mb-2 cursor-pointer"
                     >
-                        {{ $item->{$getLabelField()} }}
+                        <span class="flex items-center">
+                            <button
+                                class="fi-icon-btn fi-color-gray fi-ac-icon-btn-action
+                                    relative
+                                    flex items-center justify-center h-7 w-7
+                                    text-gray-400
+                                    rounded-lg
+                                    outline-none
+                                    transition duration-75
+                                    focus:ring-2 focus:ring-primary-600
+                                    hover:text-gray-500
+                                    disabled:pointer-events-none disabled:opacity-70
+                                    dark:text-gray-500 dark:hover:text-gray-400 dark:focus:ring-primary-500"
+                                type="button"
+                            >
+                                <x-heroicon-o-arrows-up-down
+                                    class="fi-icon-btn-icon h-4 w-4"
+                                />
+                            </button>
+                            {{ $item->{$getLabelField()} }}
+                        </span>
                     </li>
                 @endforeach
             </ul>
         </div>
     @endif
 
-    <div>
+    <div @class(['flex gap-4', 'mt-3' => count($getStateAsResources())])>
+        {{ $getAction('open-resource-picker') }}
+
         @if ($selected->isNotEmpty())
             {{ $getAction('clear-selection') }}
         @endif
-
-        {{ $getAction('open-resource-picker') }}
     </div>
 </x-dynamic-component>
