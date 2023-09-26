@@ -38,13 +38,13 @@
                     <li
                         x-sortable-handle
                         x-sortable-item="{{ $item->getKey() }}"
-                        class="text-sm mb-2 cursor-pointer"
+                        class="text-sm my-2 cursor-pointer"
                     >
                         <span class="flex items-center">
                             <button
                                 class="fi-icon-btn fi-color-gray fi-ac-icon-btn-action
                                     relative
-                                    flex items-center justify-center h-7 w-7
+                                    flex items-center justify-center h-7 w-7 mr-2
                                     text-gray-400
                                     rounded-lg
                                     outline-none
@@ -59,7 +59,7 @@
                                     class="fi-icon-btn-icon h-4 w-4"
                                 />
                             </button>
-                            {{ $item->{$getLabelField()} }}
+                            <p class="ml-2">{{ $item->{$getLabelField()} }}</p>
                         </span>
                     </li>
                 @endforeach
