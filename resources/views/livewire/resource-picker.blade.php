@@ -6,6 +6,11 @@
             statePath: '{{ $statePath }}',
             resources: this.state,
         })
+
+        $wire.dispatch('picked-resource', {
+            statePath: '{{ $statePath }}',
+            resources: this.state,
+        })
     },
     updatedState () {
         if (! this.isMultiple) {
