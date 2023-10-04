@@ -41,24 +41,12 @@
                         class="text-sm my-2 cursor-pointer"
                     >
                         <span class="flex items-center">
-                            <button
-                                class="fi-icon-btn fi-color-gray fi-ac-icon-btn-action
-                                    relative
-                                    flex items-center justify-center h-7 w-7 mr-2
-                                    text-gray-400
-                                    rounded-lg
-                                    outline-none
-                                    transition duration-75
-                                    focus:ring-2 focus:ring-primary-600
-                                    hover:text-gray-500
-                                    disabled:pointer-events-none disabled:opacity-70
-                                    dark:text-gray-500 dark:hover:text-gray-400 dark:focus:ring-primary-500"
+                            <x-filament::icon-button
+                                icon="heroicon-o-arrows-up-down"
                                 type="button"
-                            >
-                                <x-heroicon-o-arrows-up-down
-                                    class="fi-icon-btn-icon h-4 w-4"
-                                />
-                            </button>
+                                color="gray"
+                                size="sm"
+                            />
                             <p class="ml-2">{{ $item->{$getLabelField()} }}</p>
                         </span>
                     </li>

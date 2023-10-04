@@ -57,24 +57,12 @@
                     :label-field="$labelField"
                     :state-path="$statePath"
                 >
-                    <input
-                        class="fi-checkbox-input fi-ta-record-checkbox
-                            text-primary-600
-                            rounded border-none bg-white shadow-sm ring-1 ring-gray-950/10
-                            dark:bg-white/5 dark:disabled:bg-transparent dark:disabled:checked:bg-gray-600 dark:ring-white/20 dark:disabled:ring-white/10
-                            dark:checked:bg-primary-500 dark:focus:ring-primary-500 dark:checked:focus:ring-primary-400/50
-                            transition duration-75
-                            checked:ring-0 checked:focus:ring-primary-500/50
-                            focus:ring-2 focus:ring-offset-0 focus:ring-primary-600
-                            disabled:pointer-events-none disabled:bg-gray-50 disabled:text-gray-50 disabled:checked:bg-current disabled:checked:text-gray-400
-                        "
-                        style="margin-top: 0.1rem;"
+                    <x-filament::input.checkbox
                         id="resource-picker::{{ $statePath }}-{{ $item->{$keyField} }}"
-                        type="checkbox"
                         x-model="state"
                         value="{{ $item->{$keyField} }}"
                         x-on:change="updatedState"
-                    >
+                    />
                 </x-dynamic-component>
             @endforeach
         </div>
