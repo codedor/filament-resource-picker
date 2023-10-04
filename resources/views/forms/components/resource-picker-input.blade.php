@@ -32,20 +32,20 @@
                     x-on:start="dragging = true"
                     x-bind:class="dragging ? 'gallery--dragging' : ''"
                 @endif
-                class="list-disc px-3"
             >
                 @foreach ($getStateAsResources() as $item)
                     <li
                         x-sortable-handle
                         x-sortable-item="{{ $item->getKey() }}"
-                        class="text-sm my-2 cursor-pointer"
+                        class="text-sm my-2"
                     >
                         <span class="flex items-center">
                             <x-filament::icon-button
-                                icon="heroicon-o-arrows-up-down"
+                                icon="heroicon-o-bars-2"
                                 type="button"
                                 color="gray"
                                 size="sm"
+                                class="cursor-move"
                             />
                             <p class="ml-2">{{ $item->{$getLabelField()} }}</p>
                         </span>
