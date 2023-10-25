@@ -45,7 +45,7 @@
         <div
             @class([
                 'gap-4',
-                'grid grid-cols-3' => $isGrid,
+                'grid grid-cols-6' => $isGrid,
                 'flex flex-col' => $isList
             ])
         >

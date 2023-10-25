@@ -63,7 +63,7 @@ class ResourcePicker extends Component
         return ResourceQuery::get($this->resourceClass, $this->search)
             ->latest()
             ->offset($offset)
-            ->limit(20)
+            ->limit(24)
             ->get();
     }
 
