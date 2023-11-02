@@ -23,7 +23,7 @@ class ResourcePickerInput extends Field
 
     public null|string|Closure $displayType = null;
 
-    public bool|Closure $isGrid = false;
+    public int|Closure $gridColumns = 1;
 
     public bool|Closure $isMultiple = false;
 
@@ -39,16 +39,21 @@ class ResourcePickerInput extends Field
         ]);
     }
 
-    public function grid(bool|Closure $grid): self
+    public function grid(int|Closure $columns = 3): self
     {
-        $this->isGrid = $grid;
+        $this->gridColumns = $columns;
 
         return $this;
     }
 
     public function isGrid(): bool
     {
-        return $this->evaluate($this->isGrid);
+        return $this->evaluate($this->gridColumns) > 1;
+    }
+
+    public function gridColumns(): int
+    {
+        return $this->evaluate($this->gridColumns);
     }
 
     public function displayType(string|Closure $displayType): self

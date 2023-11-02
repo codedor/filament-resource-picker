@@ -7,6 +7,11 @@
             resources: this.state,
         })
 
+       $wire.$parent.callMountedFormComponentAction({
+            statePath: '{{ $statePath }}',
+            resources: this.state,
+        })
+
         this.close()
     },
     updatedState () {
@@ -45,8 +50,12 @@
         <div
             @class([
                 'gap-4',
-                'grid grid-cols-6' => $isGrid,
-                'flex flex-col' => $isList
+                'flex flex-col' => $isList,
+                'grid grid-cols-2' => $isGrid && $gridColumns < 3,
+                'grid grid-cols-3' => $isGrid && $gridColumns === 3,
+                'grid grid-cols-4' => $isGrid && $gridColumns === 4,
+                'grid grid-cols-5' => $isGrid && $gridColumns === 5,
+                'grid grid-cols-6' => $isGrid && $gridColumns > 5,
             ])
         >
             @foreach ($items as $item)

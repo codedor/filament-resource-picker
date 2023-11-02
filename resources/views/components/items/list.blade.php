@@ -3,7 +3,7 @@
 
     <span class="ml-2">
         <span class="text-sm">{{ $item->{$labelField} }}</span>
-        <span
+        {{-- <span
             class="min-h-6 px-2 py-0.5 inline-flex items-center justify-center space-x-1 ml-2
                 text-custom-700 text-sm font-medium tracking-tight
                 bg-custom-500/10 rounded-xl whitespace-nowrap
@@ -18,6 +18,6 @@
             @else
                 Offline
             @endif
-        </span>
+        </span> --}}
     </span>
 </label>

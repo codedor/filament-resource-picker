@@ -14,7 +14,7 @@
             <div class="text-sm">
                 {{ $item->{$labelField} }}
             </div>
-            <div>
+            {{-- <div>
                 <div
                     class="min-h-6 px-2 py-0.5 inline-flex items-center justify-center space-x-1 mt-2
                         text-custom-700 text-sm font-medium tracking-tight
@@ -31,7 +31,7 @@
                         Offline
                     @endif
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </label>
