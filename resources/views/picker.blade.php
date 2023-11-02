@@ -5,6 +5,7 @@
 
     :display-type="$displayType"
     :is-grid="$isGrid"
+    :grid-columns="$gridColumns"
 
     :key-field="$keyField"
     :label-field="$labelField"

@@ -26,6 +26,8 @@ class ResourcePicker extends Component
 
     public bool $isGrid;
 
+    public int $gridColumns;
+
     public string $search = '';
 
     public function mount(
@@ -36,7 +38,8 @@ class ResourcePicker extends Component
         string $labelField,
         array $state,
         bool $isMultiple,
-        bool $isGrid
+        bool $isGrid,
+        int $gridColumns,
     ) {
         $this->resourceClass = $resourceClass;
         $this->displayType = $displayType;
@@ -46,6 +49,7 @@ class ResourcePicker extends Component
         $this->state = Arr::wrap($state);
         $this->isMultiple = $isMultiple;
         $this->isGrid = $isGrid;
+        $this->gridColumns = $gridColumns;
 
         $this->items = $this->getItems();
     }
@@ -63,7 +67,7 @@ class ResourcePicker extends Component
         return ResourceQuery::get($this->resourceClass, $this->search)
             ->latest()
             ->offset($offset)
-            ->limit(20)
+            ->limit(24)
             ->get();
     }
 

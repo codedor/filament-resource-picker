@@ -37,19 +37,29 @@
                     <li
                         x-sortable-handle
                         x-sortable-item="{{ $item->getKey() }}"
+                        class="text-sm my-2"
                     >
-                        {{ $item->{$getLabelField()} }}
+                        <span class="flex items-center">
+                            <x-filament::icon-button
+                                icon="heroicon-o-bars-2"
+                                type="button"
+                                color="gray"
+                                size="sm"
+                                class="cursor-move"
+                            />
+                            <p class="ml-2">{{ $item->{$getLabelField()} }}</p>
+                        </span>
                     </li>
                 @endforeach
             </ul>
         </div>
     @endif
 
-    <div>
+    <div @class(['flex gap-4', 'mt-3' => count($getStateAsResources())])>
+        {{ $getAction('open-resource-picker') }}
+
         @if ($selected->isNotEmpty())
             {{ $getAction('clear-selection') }}
         @endif
-
-        {{ $getAction('open-resource-picker') }}
     </div>
 </x-dynamic-component>
