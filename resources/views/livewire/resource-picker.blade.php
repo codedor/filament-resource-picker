@@ -1,12 +1,7 @@
 <div x-data="{
-    state: @entangle('state'),
+    state: @entangle('state').initialValue,
     isMultiple: @entangle('isMultiple'),
     submit () {
-        $wire.$parent.callMountedFormComponentAction({
-            statePath: '{{ $statePath }}',
-            resources: this.state,
-        })
-
         $wire.dispatch('picked-resource', {
             statePath: '{{ $statePath }}',
             resources: this.state,
