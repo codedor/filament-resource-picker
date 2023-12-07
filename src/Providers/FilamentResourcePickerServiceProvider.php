@@ -31,6 +31,7 @@ class FilamentResourcePickerServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         \Illuminate\Database\Query\Builder::macro('resources', function (array $ids = []) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             if (! $ids) {
                 return $this;
             }
