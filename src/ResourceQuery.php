@@ -6,7 +6,7 @@ class ResourceQuery
 {
     public const resourcePickerQueryMethod = 'resourcePickerQuery';
 
-    public static function get(string $resourceClass, string $search = null)
+    public static function get(string $resourceClass, ?string $search = null)
     {
         $query = $resourceClass::getEloquentQuery();
 
