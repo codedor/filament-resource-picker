@@ -2,6 +2,7 @@
 
 namespace Codedor\FilamentResourcePicker\Providers;
 
+use App\Models\Location;
 use Codedor\FilamentResourcePicker\Livewire\ResourcePicker;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
@@ -29,6 +30,19 @@ class FilamentResourcePickerServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        \Illuminate\Database\Query\Builder::macro('resources', function (array $ids = []) {
+            if (! $ids) {
+                return $this;
+            }
+
+            $idsString = collect($ids)->map(fn ($id) => "'{$id}'")->join(',');
+
+            $this->whereIn('id', $ids)
+                ->orderByRaw("FIELD(id, {$idsString})");
+
+            return $this;
+        });
+
         foreach ($this->livewireComponents as $key => $livewireComponent) {
             Livewire::component("{$this->packageName()}::$key", $livewireComponent);
         }

@@ -78,3 +78,11 @@ public static function resourcePickerQuery(Builder $query, ?string $search = nul
         );
 }
 ```
+
+## Custom query builder method
+
+We provide a `resources(array $ids = [])` method on the query builder, so it's easy to fetch the resources that are picked and maintain their order.
+
+```php
+$posts = Post::resources([1, 2, 3])->get();
+```
