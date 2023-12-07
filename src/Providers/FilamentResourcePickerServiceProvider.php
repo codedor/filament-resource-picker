@@ -2,6 +2,7 @@
 
 namespace Codedor\FilamentResourcePicker\Providers;
 
+use App\Models\Location;
 use Codedor\FilamentResourcePicker\Livewire\ResourcePicker;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
