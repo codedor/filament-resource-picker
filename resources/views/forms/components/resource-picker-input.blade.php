@@ -6,10 +6,19 @@
 <x-dynamic-component
     :component="$getFieldWrapperView()"
     :field="$field"
+    x-data="{
+        isMultiple: {{ json_encode($isMultiple()) }},
+    }"
     x-on:picked-resource.window="(event) => {
         // Set the state only if the event is for this resource picker
         if (event.detail.statePath !== '{{ $statePath }}') return
         $wire.$set(event.detail.statePath, event.detail.resources)
+
+        if (! this.isMultiple) {
+            $wire.dispatch('close-modal', {
+                id: $wire.id + '-form-component-action',
+            })
+        }
     }"
 >
     @if ($selected->isEmpty())
