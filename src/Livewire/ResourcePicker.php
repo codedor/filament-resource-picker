@@ -28,8 +28,9 @@ class ResourcePicker extends Component
 
     public int $gridColumns;
 
-    public null|int $minItems = null;
-    public null|int $maxItems = null;
+    public ?int $minItems = null;
+
+    public ?int $maxItems = null;
 
     public string $search = '';
 
@@ -43,8 +44,8 @@ class ResourcePicker extends Component
         bool $isMultiple,
         bool $isGrid,
         int $gridColumns,
-        null|int $minItems = null,
-        null|int $maxItems = null,
+        ?int $minItems = null,
+        ?int $maxItems = null,
     ) {
         $this->resourceClass = $resourceClass;
         $this->displayType = $displayType;
