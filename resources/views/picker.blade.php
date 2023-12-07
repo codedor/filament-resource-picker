@@ -11,4 +11,7 @@
     :label-field="$labelField"
 
     :is-multiple="$isMultiple"
+
+    :min-items="$minItems"
+    :max-items="$maxItems"
 />

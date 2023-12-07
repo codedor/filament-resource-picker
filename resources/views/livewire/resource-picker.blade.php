@@ -1,6 +1,8 @@
 <div x-data="{
     state: @entangle('state').initialValue,
     isMultiple: @entangle('isMultiple'),
+    minItems: @entangle('minItems'),
+    maxItems: @entangle('maxItems'),
     submit () {
         $wire.dispatch('picked-resource', {
             statePath: '{{ $statePath }}',

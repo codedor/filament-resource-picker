@@ -28,6 +28,9 @@ class ResourcePicker extends Component
 
     public int $gridColumns;
 
+    public null|int $minItems = null;
+    public null|int $maxItems = null;
+
     public string $search = '';
 
     public function mount(
@@ -40,6 +43,8 @@ class ResourcePicker extends Component
         bool $isMultiple,
         bool $isGrid,
         int $gridColumns,
+        null|int $minItems = null,
+        null|int $maxItems = null,
     ) {
         $this->resourceClass = $resourceClass;
         $this->displayType = $displayType;
@@ -50,6 +55,8 @@ class ResourcePicker extends Component
         $this->isMultiple = $isMultiple;
         $this->isGrid = $isGrid;
         $this->gridColumns = $gridColumns;
+        $this->minItems = $minItems;
+        $this->maxItems = $maxItems;
 
         $this->items = $this->getItems();
     }
