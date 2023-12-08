@@ -12,6 +12,6 @@
 
     :is-multiple="$isMultiple"
 
-    :min-items="$minItems"
-    :max-items="$maxItems"
+    :min-items="$minItems ?? null"
+    :max-items="$maxItems ?? null"
 />
