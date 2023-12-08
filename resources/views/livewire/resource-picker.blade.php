@@ -1,13 +1,21 @@
 <div x-data="{
-    state: @entangle('state').initialValue,
+    state: @entangle('state'),
     isMultiple: @entangle('isMultiple'),
     minItems: @entangle('minItems'),
     maxItems: @entangle('maxItems'),
     submit () {
-        $wire.dispatch('picked-resource', {
+        let parent = Livewire.all().find(component => component.name.includes('app.filament.resources'))
+
+        if (parent) {
+            parent.$wire.$set('{{ $statePath }}', this.state)
+        }
+
+        $dispatch('picked-resource', {
             statePath: '{{ $statePath }}',
-            resources: this.state,
+            resources: this.state
         })
+
+        close()
     },
     updatedState () {
         if (! this.isMultiple) {
