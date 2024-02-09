@@ -83,7 +83,7 @@
             <div class="py-6">
                 <x-filament::button
                     size="xs"
-                    color="gray"
+                    color="primary"
                     wire:click="loadMoreItems()"
                 >
                     {{ __('filament-resource-picker::picker.load more') }}
