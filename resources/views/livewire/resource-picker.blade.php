@@ -6,7 +6,7 @@
     submit () {
         let parent = Livewire.all().find(component => component.name.includes('app.filament.resources'))
 
-        if (parent) {
+        if (parent && parent.$wire.$get('{{ $statePath }}') !== undefined) {
             parent.$wire.$set('{{ $statePath }}', this.state)
         }
 
