@@ -18,22 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.4...v1.0.5
 
-## v1.0.2 - 2023-12-08
-
-**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.1...v1.0.2
-
-## v1.0.1 - 2023-12-08
-
-**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.0...v1.0.1
-
-## v1.0.0 - 2023-12-07
-
-**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v0.1.3...v1.0.0
-
-## v0.1.2 - 2023-12-06
-
-**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v0.1.1...v0.1.2
-
 ## v1.0.4 - 2024-06-14
 
 ### What's Changed
@@ -57,6 +41,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * change styling button load more by @DevolderLouise in https://github.com/codedor/filament-resource-picker/pull/8
 
 **Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.2...v1.0.3
+
+## v1.0.2 - 2023-12-08
+
+**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.1...v1.0.2
+
+## v1.0.1 - 2023-12-08
+
+**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.0.0...v1.0.1
+
+## v1.0.0 - 2023-12-07
+
+**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v0.1.3...v1.0.0
+
+## v0.1.2 - 2023-12-06
+
+**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v0.1.1...v0.1.2
 
 ## v0.1.1 - 2023-11-03
 
