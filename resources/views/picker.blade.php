@@ -14,4 +14,6 @@
 
     :min-items="$minItems ?? null"
     :max-items="$maxItems ?? null"
+
+    :relation-filters="$relationFilters ?? null"
 />

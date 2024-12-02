@@ -32,7 +32,11 @@ class ResourcePicker extends Component
 
     public ?int $maxItems = null;
 
+    public ?array $relationFilters = null;
+
     public string $search = '';
+
+    public array $selectedRelations = [];
 
     public function mount(
         string $resourceClass,
@@ -46,6 +50,7 @@ class ResourcePicker extends Component
         int $gridColumns,
         ?int $minItems = null,
         ?int $maxItems = null,
+        ?array $relationFilters = null,
     ) {
         $this->resourceClass = $resourceClass;
         $this->displayType = $displayType;
@@ -58,6 +63,7 @@ class ResourcePicker extends Component
         $this->gridColumns = $gridColumns;
         $this->minItems = $minItems;
         $this->maxItems = $maxItems;
+        $this->relationFilters = $relationFilters;
 
         $this->items = $this->getItems();
     }
@@ -73,6 +79,7 @@ class ResourcePicker extends Component
     public function getItems(int $offset = 0)
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
+            ->tap(fn($query) => $this->searchRelations($query))
             ->latest()
             ->offset($offset)
             ->limit(24)
@@ -82,6 +89,7 @@ class ResourcePicker extends Component
     public function getItemCount()
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
+            ->tap(fn($query) => $this->searchRelations($query))
             ->count();
     }
 
@@ -96,5 +104,27 @@ class ResourcePicker extends Component
     public function updatedSearch(): void
     {
         $this->items = $this->getItems();
+    }
+
+    public function toggleRelation($relationId): void
+    {
+        if (in_array($relationId, $this->selectedRelations)) {
+            $this->selectedRelations = array_diff($this->selectedRelations, [$relationId]);
+        } else {
+            $this->selectedRelations[] = $relationId;
+        }
+
+        $this->items = $this->getItems();
+    }
+
+    protected function searchRelations($query)
+    {
+        return collect($this->relationFilters)->each(function($filters, $relation) use ($query) {
+            if (!empty($this->selectedRelations)) {
+                $query->whereHas($relation, function($q) use ($filters) {
+                    $q->whereIn('id', $this->selectedRelations);
+                });
+            }
+        });
     }
 }
