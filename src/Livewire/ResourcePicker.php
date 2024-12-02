@@ -79,7 +79,7 @@ class ResourcePicker extends Component
     public function getItems(int $offset = 0)
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
-            ->tap(fn($query) => $this->searchRelations($query))
+            ->tap(fn ($query) => $this->searchRelations($query))
             ->latest()
             ->offset($offset)
             ->limit(24)
@@ -89,7 +89,7 @@ class ResourcePicker extends Component
     public function getItemCount()
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
-            ->tap(fn($query) => $this->searchRelations($query))
+            ->tap(fn ($query) => $this->searchRelations($query))
             ->count();
     }
 
@@ -119,9 +119,9 @@ class ResourcePicker extends Component
 
     protected function searchRelations($query)
     {
-        return collect($this->relationFilters)->each(function($filters, $relation) use ($query) {
-            if (!empty($this->selectedRelations)) {
-                $query->whereHas($relation, function($q) use ($filters) {
+        return collect($this->relationFilters)->each(function ($filters, $relation) use ($query) {
+            if (! empty($this->selectedRelations)) {
+                $query->whereHas($relation, function ($q) {
                     $q->whereIn('id', $this->selectedRelations);
                 });
             }
