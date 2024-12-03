@@ -51,17 +51,12 @@
                     <div class="text-sm font-medium mb-2 dark:text-gray-200">Filter by {{ $relation }}</div>
                     <div class="flex flex-wrap gap-2">
                         @foreach($filters as $filter)
-                            <button
-                                wire:click="toggleRelation({{ $filter['id'] }})"
-                                type="button"
-                                @class([
-                                    'inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-medium border',
-                                    'bg-gray-300 text-gray-800 hover:bg-gray-200 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500' => in_array($filter['id'], $selectedRelations),
-                                    'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600' => !in_array($filter['id'], $selectedRelations),
-                                ])
+                            <x-filament::badge
+                                :color="$this->isRelationFilterActive($relation, $filter['id']) ? 'info' : 'gray'"
+                                wire:click="toggleRelation({{$relation}}, {{ $filter['id'] }})"
                             >
                                 {{ $filter['name'] }}
-                            </button>
+                            </x-filament::badge>
                         @endforeach
                     </div>
                 </div>

@@ -106,13 +106,9 @@ class ResourcePicker extends Component
         $this->items = $this->getItems();
     }
 
-    public function toggleRelation($relationId): void
+    public function toggleRelation($relation, $id): void
     {
-        if (in_array($relationId, $this->selectedRelations)) {
-            $this->selectedRelations = array_diff($this->selectedRelations, [$relationId]);
-        } else {
-            $this->selectedRelations[] = $relationId;
-        }
+        $this->setSelectedRelation($relation, $id);
 
         $this->items = $this->getItems();
     }
@@ -120,11 +116,37 @@ class ResourcePicker extends Component
     protected function searchRelations($query)
     {
         return collect($this->relationFilters)->each(function ($filters, $relation) use ($query) {
-            if (! empty($this->selectedRelations)) {
-                $query->whereHas($relation, function ($q) {
-                    $q->whereIn('id', $this->selectedRelations);
+            if (! empty($this->getSelectedRelations($relation))) {
+                $query->whereHas($relation, function ($q) use ($relation) {
+                    $q->whereIn('id', $this->getSelectedRelations($relation));
                 });
             }
         });
+    }
+
+    protected function setSelectedRelation($relation, $id): void
+    {
+        if (!array_key_exists($relation, $this->selectedRelations)) {
+            $this->selectedRelations[$relation][] = $id;
+            return;
+        }
+
+        if (!in_array($id, $this->selectedRelations[$relation])) {
+            $this->selectedRelations[$relation][] = $id;
+            return;
+        }
+
+        $this->selectedRelations[$relation] = array_diff($this->selectedRelations[$relation], [$id]);
+    }
+
+
+    protected function getSelectedRelations($relation)
+    {
+        return $this->selectedRelations[$relation] ?? [];
+    }
+
+    public function isRelationFilterActive($relation, $id): bool
+    {
+        return in_array($id, $this->getSelectedRelations($relation));
     }
 }
