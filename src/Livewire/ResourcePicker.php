@@ -126,19 +126,20 @@ class ResourcePicker extends Component
 
     protected function setSelectedRelation($relation, $id): void
     {
-        if (!array_key_exists($relation, $this->selectedRelations)) {
+        if (! array_key_exists($relation, $this->selectedRelations)) {
             $this->selectedRelations[$relation][] = $id;
+
             return;
         }
 
-        if (!in_array($id, $this->selectedRelations[$relation])) {
+        if (! in_array($id, $this->selectedRelations[$relation])) {
             $this->selectedRelations[$relation][] = $id;
+
             return;
         }
 
         $this->selectedRelations[$relation] = array_diff($this->selectedRelations[$relation], [$id]);
     }
-
 
     protected function getSelectedRelations($relation)
     {
