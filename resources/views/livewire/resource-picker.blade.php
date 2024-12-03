@@ -53,7 +53,7 @@
                         @foreach($filters as $filter)
                             <x-filament::badge
                                 :color="$this->isRelationFilterActive($relation, $filter['id']) ? 'info' : 'gray'"
-                                wire:click="toggleRelation({{$relation}}, {{ $filter['id'] }})"
+                                wire:click="toggleRelation('{{$relation}}', {{ $filter['id'] }})"
                             >
                                 {{ $filter['name'] }}
                             </x-filament::badge>
