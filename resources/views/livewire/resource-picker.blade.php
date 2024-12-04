@@ -45,6 +45,23 @@
                 </svg>
             </label>
         </div>
+        @if(!empty($relationFilters))
+            @foreach($relationFilters as $relation => $filters)
+                <div class="flex-1 mb-4">
+                    <div class="text-sm font-medium mb-2 dark:text-gray-200">Filter by {{ $relation }}</div>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach($filters as $filter)
+                            <x-filament::badge
+                                :color="$this->isRelationFilterActive($relation, $filter['id']) ? 'info' : 'gray'"
+                                wire:click="toggleRelation('{{$relation}}', {{ $filter['id'] }})"
+                            >
+                                {{ $filter['name'] }}
+                            </x-filament::badge>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        @endif
     @endif
     <div
         class="overflow-hidden overflow-y-auto p-1"

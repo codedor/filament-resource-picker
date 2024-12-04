@@ -32,7 +32,11 @@ class ResourcePicker extends Component
 
     public ?int $maxItems = null;
 
+    public ?array $relationFilters = null;
+
     public string $search = '';
+
+    public array $selectedRelations = [];
 
     public function mount(
         string $resourceClass,
@@ -46,6 +50,7 @@ class ResourcePicker extends Component
         int $gridColumns,
         ?int $minItems = null,
         ?int $maxItems = null,
+        ?array $relationFilters = null,
     ) {
         $this->resourceClass = $resourceClass;
         $this->displayType = $displayType;
@@ -58,6 +63,7 @@ class ResourcePicker extends Component
         $this->gridColumns = $gridColumns;
         $this->minItems = $minItems;
         $this->maxItems = $maxItems;
+        $this->relationFilters = $relationFilters;
 
         $this->items = $this->getItems();
     }
@@ -73,6 +79,7 @@ class ResourcePicker extends Component
     public function getItems(int $offset = 0)
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
+            ->tap(fn ($query) => $this->searchRelations($query))
             ->latest()
             ->offset($offset)
             ->limit(24)
@@ -82,6 +89,7 @@ class ResourcePicker extends Component
     public function getItemCount()
     {
         return ResourceQuery::get($this->resourceClass, $this->search)
+            ->tap(fn ($query) => $this->searchRelations($query))
             ->count();
     }
 
@@ -96,5 +104,50 @@ class ResourcePicker extends Component
     public function updatedSearch(): void
     {
         $this->items = $this->getItems();
+    }
+
+    public function toggleRelation($relation, $id): void
+    {
+        $this->setSelectedRelation($relation, $id);
+
+        $this->items = $this->getItems();
+    }
+
+    protected function searchRelations($query)
+    {
+        return collect($this->relationFilters)->each(function ($filters, $relation) use ($query) {
+            if (! empty($this->getSelectedRelations($relation))) {
+                $query->whereHas($relation, function ($q) use ($relation) {
+                    $q->whereIn('id', $this->getSelectedRelations($relation));
+                });
+            }
+        });
+    }
+
+    protected function setSelectedRelation($relation, $id): void
+    {
+        if (! array_key_exists($relation, $this->selectedRelations)) {
+            $this->selectedRelations[$relation][] = $id;
+
+            return;
+        }
+
+        if (! in_array($id, $this->selectedRelations[$relation])) {
+            $this->selectedRelations[$relation][] = $id;
+
+            return;
+        }
+
+        $this->selectedRelations[$relation] = array_diff($this->selectedRelations[$relation], [$id]);
+    }
+
+    protected function getSelectedRelations($relation)
+    {
+        return $this->selectedRelations[$relation] ?? [];
+    }
+
+    public function isRelationFilterActive($relation, $id): bool
+    {
+        return in_array($id, $this->getSelectedRelations($relation));
     }
 }
