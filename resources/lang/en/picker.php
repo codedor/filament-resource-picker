@@ -10,4 +10,5 @@ return [
     'search_label' => 'Search',
     'search_placeholder' => 'Search resources',
     'load more' => 'Load more resources',
+    'open modal' => 'Open resource picker',
 ];
