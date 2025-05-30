@@ -32,9 +32,9 @@ class ResourcePickerInput extends Field
         $this->registerActions([
             OpenResourcePickerAction::make(),
 
-            Action::make('clear-selection')
+            \Filament\Actions\Action::make('clear-selection')
                 ->label(__('filament-resource-picker::picker.clear selection'))
-                ->action(fn (Set $set) => $set($this->getStatePath(false), []))
+                ->action(fn (\Filament\Schemas\Components\Utilities\Set $set) => $set($this->getStatePath(false), []))
                 ->color('gray'),
         ]);
     }
