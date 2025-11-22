@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.3.0 - 2025-11-20
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/codedor/filament-resource-picker/pull/21
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/codedor/filament-resource-picker/pull/24
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/codedor/filament-resource-picker/pull/26
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/codedor/filament-resource-picker/pull/25
+* Add extra translatable strings by @jyrkidn in https://github.com/codedor/filament-resource-picker/pull/20
+
+**Full Changelog**: https://github.com/codedor/filament-resource-picker/compare/v1.2.0...v1.3.0
+
 ## v1.2.0 - 2025-02-28
 
 ### What's Changed

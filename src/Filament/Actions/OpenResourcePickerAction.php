@@ -15,6 +15,7 @@ class OpenResourcePickerAction extends \Filament\Actions\Action
     {
         parent::setUp();
 
+        $this->label(__('filament-resource-picker::picker.open modal'));
         $this->modalHeading(__('filament-resource-picker::picker.modal heading'));
 
         $this->modalSubmitAction(false);
