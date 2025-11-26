@@ -43,6 +43,7 @@ class FilamentResourcePickerServiceProvider extends PackageServiceProvider
             return $this;
         });
 
+        Livewire::addNamespace($this->packageName(), classNamespace: 'Codedor\FilamentResourcePicker\Livewire');
         foreach ($this->livewireComponents as $key => $livewireComponent) {
             Livewire::component("{$this->packageName()}::$key", $livewireComponent);
         }
